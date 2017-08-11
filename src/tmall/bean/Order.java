@@ -114,7 +114,7 @@ public class Order {
 	public void setTotalNumber(int totalNumber) {
 		this.totalNumber = totalNumber;
 	}
-	public String getStatus() {
+	public String getStatusDesc() {
 		String desc = "δ֪";
 		switch(status){
 //	      case OrderDAO.waitPay:
@@ -140,5 +140,12 @@ public class Order {
 		}
 		return desc;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	
 }
