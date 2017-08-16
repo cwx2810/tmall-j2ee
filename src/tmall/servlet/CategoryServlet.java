@@ -6,11 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import tmall.bean.Category;
+import tmall.util.Page;
 
 public class CategoryServlet extends BaseBackServlet{
 	public String list(HttpServletRequest request,HttpServletResponse response,Page page){
 		//通过BaseServlet中声明DAO从数据库获取数据集合
-		List<Category> cs = categoryDAO.list(page.getStart(), page.getCount);
+		List<Category> cs = categoryDAO.list(page.getStart(), page.getCount());
+		//通过总数判断一共有多少页面，最后一页是多少
 		int total = categoryDAO.getTotal();
 		page.setTotal(total);
 		
