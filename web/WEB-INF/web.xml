@@ -8,6 +8,9 @@
 		<filter-name>BackServletFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	
+	
 	<servlet>
 		<servlet-name>CategoryServlet</servlet-name>
 		<servlet-class>tmall.servlet.CategoryServlet</servlet-class>
@@ -16,4 +19,14 @@
 		<servlet-name>CategoryServlet</servlet-name>
 		<url-pattern>/categoryServlet</url-pattern>
 	</servlet-mappimg>
+	
+	
+	<filter>
+		<filter-name>EncodingFilter</filter-name>
+		<filter-class>tmall.filter.EncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>EncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>
