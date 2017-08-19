@@ -62,6 +62,28 @@ public class CategoryServlet extends BaseBackServlet{
 		return "@admin_category_list";
 	}
 	
+	//删除
+	public String delete(HttpServletRequest request,HttpServletResponse response,Page page){
+		//获取网站请求要删除条目的ID
+		int id = Integer.parseInt(request.getParameter("id"));
+		//通过DAO删除
+		categoryDAO.delete(id);
+		//客户端跳转
+		return "@admin_category_list";
+	}
+	
+	//编辑
+	public String edit(HttpServletRequest request,HttpServletResponse response,Page page){
+		//获取网站请求要编辑的id
+		int id = Integer.parseInt(request.getParameter("id"));
+		//用id通过DAO获取实体类中的对象
+		Category c = categoryDAO.get(id);
+		//把获取到的对象放在请求中
+		request.setAttribute("c", c);
+		//服务端跳转到编辑页面，在jsp页面把获取到的对象放在待编辑页面上，下面通过update更新他们
+		return "admin/editCategory.jsp";
+	}
+	
 	
 	//查询
 	public String list(HttpServletRequest request,HttpServletResponse response,Page page){
