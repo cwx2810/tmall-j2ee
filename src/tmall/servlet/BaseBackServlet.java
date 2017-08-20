@@ -76,7 +76,7 @@ public abstract class BaseBackServlet extends HttpServlet{
 		}
 	}
 	
-	//处理上传的东东
+	//处理上传的东东，上传文件可以直接获取，但浏览器指定上传的为二进制，要经过处理获取
 	public InputStream parseUpload(HttpServletRequest request, Map<String, String> params) {
 		InputStream is =null;
 		try {
@@ -90,9 +90,10 @@ public abstract class BaseBackServlet extends HttpServlet{
             while (iter.hasNext()) {
                 FileItem item = (FileItem) iter.next();
                 if (!item.isFormField()) {
-                    // item.getInputStream() 获取上传文件的输入流
+                    // item.getInputStream() 获取上传文件的输入流，FormField表示判断上传的是文件字段，直接通过获取输入流普通处理
                     is = item.getInputStream();
                 } else {
+                	//非文件字段，即二进制，通过获取名称和值判断是什么字段
                 	String paramName = item.getFieldName();
                 	String paramValue = item.getString();
                 	paramValue = new String(paramValue.getBytes("ISO-8859-1"), "UTF-8");

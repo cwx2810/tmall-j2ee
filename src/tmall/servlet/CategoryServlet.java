@@ -20,7 +20,7 @@ import tmall.util.Page;
 public class CategoryServlet extends BaseBackServlet{
 	//添加
 	public String add(HttpServletRequest request,HttpServletResponse response,Page page){
-		//获取浏览器传来的二进制参数（图片等），经过BaseServlet中的Upload方法处理后，赋给输入流
+		//获取浏览器传来的参数（图片等），经过BaseServlet中的Upload方法处理后，赋给输入流
 		Map<String,String> params = new HashMap<>();
 		InputStream is = super.parseUpload(request, params);
 		//获取传入的name信息，根据name，借助DAO添加数据库
@@ -82,6 +82,52 @@ public class CategoryServlet extends BaseBackServlet{
 		request.setAttribute("c", c);
 		//服务端跳转到编辑页面，在jsp页面把获取到的对象放在待编辑页面上，下面通过update更新他们
 		return "admin/editCategory.jsp";
+	}
+	
+	//更新，和添加大同小异
+	public String update(HttpServletRequest request,HttpServletResponse response,Page page){
+		//建立哈希表，获取浏览器传来的参数
+		Map<String,String> params = new HashMap();
+		//用父类的update方法过滤一下，若是文件，可以直接获取，是二进制获取的方法不同，获取后赋给输入流等待处理
+		InputStream is = super.parseUpload(request, params);
+		//根据name和id，通过DAO更新数据库
+		String name = params.get("name");
+		int id = Integer.parseInt(params.get("id"));
+		Category c = new Category();
+		c.setId(id);
+		c.setName(name);
+		categoryDAO.update(c);
+		//定位服务器图片存放目录
+		File imageFolder = new File(request.getSession().getServletContext().getRealPath("img/category"));
+		//上传后的图片以id.jpg方式命名
+		File file = new File(imageFolder,c.getId()+".jpg");
+		//确保图片目录是创建了的，否则会无法创建图片文件
+		file.getParentFile().mkdirs();
+		//正式上传
+		try {
+			//corner case 输入流为空或者可取字节为0，则不能进行上传
+			if(is!=null && is.available()!=0){
+				//可以上传，创建输入流准备复制
+				try (FileOutputStream fos = new FileOutputStream(file)){
+					//初始化二进制空进
+					byte b[]  = new byte[1024*1024];
+					int length = 0;
+					//从输入流遍历读取所有字节写进输出流，直到长度变为-1读不出来为止
+					while((length = is.read(b))!=-1){
+						//写进输入流，开始为0，长度为length
+						fos.write(b, 0, length);
+					}
+					//刷新执行
+					fos.flush();
+					//确保文件是jpg格式
+					BufferedImage img = ImageUtil.change2jpg(file);
+					//执行写图片操作，传入对象，格式化名称，输出流对象
+					ImageIO.write(img, "jpg", file);
+				} catch (Exception e) {}
+			}
+		} catch (IOException e) {}
+		//客户端跳转
+		return "@admin_category_list";
 	}
 	
 	
