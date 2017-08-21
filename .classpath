@@ -11,5 +11,5 @@
 	<classpathentry kind="lib" path="D:/project/tmall-j2ee/lib/spring-core-3.2.0.M1.jar"/>
 	<classpathentry kind="lib" path="D:/project/tmall-j2ee/lib/spring-web-3.2.0.M1.jar"/>
 	<classpathentry kind="lib" path="D:/project/tmall-j2ee/lib/standard.jar"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="web/WEB-INF/classes"/>
 </classpath>

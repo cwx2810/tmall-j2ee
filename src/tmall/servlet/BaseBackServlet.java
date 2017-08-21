@@ -37,7 +37,7 @@ public abstract class BaseBackServlet extends HttpServlet{
 	protected OrderDAO orderDAO = new OrderDAO();
 	protected OrderItemDAO orderItemDAO = new OrderItemDAO();
 	protected ProductDAO productDAO = new ProductDAO();
-	protected ProductImageDAO prodectImageDAO = new ProductImageDAO();
+	protected ProductImageDAO productImageDAO = new ProductImageDAO();
 	protected PropertyDAO propertyDAO = new PropertyDAO();
 	protected PropertyValueDAO propertyValueDAO = new PropertyValueDAO();
 	protected ReviewDAO reviewDAO = new ReviewDAO();
