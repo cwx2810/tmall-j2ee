@@ -10,6 +10,16 @@
 	</filter-mapping>
 	
 	<servlet>
+	    <servlet-name>ForeServlet</servlet-name>
+	    <servlet-class>tmall.servlet.ForeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>ForeServlet</servlet-name>
+	    <url-pattern>/foreServlet</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
         <servlet-name>PropertyServlet</servlet-name>
         <servlet-class>tmall.servlet.PropertyServlet</servlet-class>
     </servlet>
