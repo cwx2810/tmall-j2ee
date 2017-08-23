@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
+	<!--前台servlet过滤器-->
 	<filter>
-		<filter-name>BackServletFilter</filter-name>
-		<filter-class>tmall.filter.BackServletFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>BackServletFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	
+        <filter-name>ForeServletFilter</filter-name>
+        <filter-class>tmall.filter.ForeServletFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ForeServletFilter</filter-name>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>        
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	<!--前台首页servlet-->
 	<servlet>
 	    <servlet-name>ForeServlet</servlet-name>
 	    <servlet-class>tmall.servlet.ForeServlet</servlet-class>
@@ -17,8 +20,28 @@
 	    <servlet-name>ForeServlet</servlet-name>
 	    <url-pattern>/foreServlet</url-pattern>
 	</servlet-mapping>
+
+
 	
-	
+	<!--后台servlet过滤器-->
+	<filter>
+		<filter-name>BackServletFilter</filter-name>
+		<filter-class>tmall.filter.BackServletFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>BackServletFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!--后台分类管理servlet-->
+	<servlet>
+		<servlet-name>CategoryServlet</servlet-name>
+		<servlet-class>tmall.servlet.CategoryServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryServlet</servlet-name>
+		<url-pattern>/categoryServlet</url-pattern>
+	</servlet-mapping>
+	<!--后台属性servlet-->
 	<servlet>
         <servlet-name>PropertyServlet</servlet-name>
         <servlet-class>tmall.servlet.PropertyServlet</servlet-class>
@@ -27,16 +50,8 @@
         <servlet-name>PropertyServlet</servlet-name>
         <url-pattern>/propertyServlet</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>ProductServlet</servlet-name>
-        <servlet-class>tmall.servlet.ProductServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ProductServlet</servlet-name>
-        <url-pattern>/productServlet</url-pattern>
-    </servlet-mapping>
-    
+
+    <!--后台产品图片servlet-->
     <servlet>
         <servlet-name>ProductImageServlet</servlet-name>
         <servlet-class>tmall.servlet.ProductImageServlet</servlet-class>
@@ -45,7 +60,7 @@
         <servlet-name>ProductImageServlet</servlet-name>
         <url-pattern>/productImageServlet</url-pattern>
     </servlet-mapping>
-    
+    <!--后台用户servlet-->
     <servlet>
         <servlet-name>UserServlet</servlet-name>
         <servlet-class>tmall.servlet.UserServlet</servlet-class>
@@ -54,17 +69,16 @@
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/userServlet</url-pattern>
     </servlet-mapping>
-	
-	<servlet>
-		<servlet-name>CategoryServlet</servlet-name>
-		<servlet-class>tmall.servlet.CategoryServlet</servlet-class>
-	</servlet>
-	<servlet-mappimg>
-		<servlet-name>CategoryServlet</servlet-name>
-		<url-pattern>/categoryServlet</url-pattern>
-	</servlet-mappimg>
-	
-	
+    <!--后台订单servlet-->
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>tmall.servlet.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/orderServlet</url-pattern>
+    </servlet-mapping>
+	<!--中文编码servlet-->
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
 		<filter-class>tmall.filter.EncodingFilter</filter-class>

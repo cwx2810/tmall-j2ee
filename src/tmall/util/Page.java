@@ -58,13 +58,13 @@ public class Page {
 		return last;
 	}
 	//获取总页数
-	public int totalPage(){
+	public int getTotalPage(){
 		int totalPage;
 		if(total%count==0)
 			totalPage = total/count;
 		else
 			totalPage = total/count + 1;
-		totalPage = totalPage==0?0:totalPage;
+		totalPage = totalPage==0?1:totalPage;
 		return totalPage;
 	}
 }
