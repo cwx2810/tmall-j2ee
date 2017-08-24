@@ -5,7 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.util.HtmlUtils;
+
 import tmall.bean.Category;
+import tmall.bean.User;
 import tmall.dao.CategoryDAO;
 import tmall.dao.ProductDAO;
 import tmall.util.Page;
@@ -24,4 +27,25 @@ public class ForeServlet extends BaseForeServlet{
         //返回首页，在jsp中把上面设置的cs放在页面上
         return "home.jsp";
     }
+	public String register(HttpServletRequest request, HttpServletResponse response, Page page) {
+		String name = request.getParameter("name");
+		String password = request.getParameter("password");
+		name = HtmlUtils.htmlEscape(name);
+		System.out.println(name);
+		boolean exist = userDAO.isExist(name);
+		
+		if(exist){
+			request.setAttribute("msg", "用户名已经被使用,不能使用");
+			return "register.jsp";	
+		}
+		
+		User user = new User();
+		user.setName(name);
+		user.setPassword(password);
+		System.out.println(user.getName());
+		System.out.println(user.getPassword());
+		userDAO.add(user);
+		
+		return "@registerSuccess.jsp";	
+	}
 }
