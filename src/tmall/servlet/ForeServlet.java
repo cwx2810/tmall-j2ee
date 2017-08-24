@@ -48,4 +48,18 @@ public class ForeServlet extends BaseForeServlet{
 		
 		return "@registerSuccess.jsp";	
 	}
+	public String login(HttpServletRequest request, HttpServletResponse response, Page page) {
+		String name = request.getParameter("name");
+		name = HtmlUtils.htmlEscape(name);
+		String password = request.getParameter("password");		
+		
+		User user = userDAO.get(name,password);
+		 
+		if(null==user){
+			request.setAttribute("msg", "ÕËºÅÃÜÂë´íÎó");
+			return "login.jsp";	
+		}
+		request.getSession().setAttribute("user", user);
+		return "@forehome";	
+	}
 }
